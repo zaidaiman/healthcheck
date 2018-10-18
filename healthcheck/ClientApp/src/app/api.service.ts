@@ -2,14 +2,14 @@ import { Injectable, Inject } from '@angular/core';
 import { HttpClient, HttpRequest, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable, Subscriber } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { ResponseModel } from './responseModel';
+import { ResponseModel, GroupModel } from './responseModel';
 
 @Injectable({
 	providedIn: 'root'
 })
 export class ApiService {
 	baseUrl: string;
-	responses: ResponseModel[] = new Array();
+	groups: GroupModel[] = new Array();
 
 	constructor(private http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
 		this.baseUrl = baseUrl;
@@ -23,15 +23,20 @@ export class ApiService {
 			}));
 	}
 
-	getURLs(): Observable<Array<ResponseModel>> {
-		return this.http.get('./assets/data.json').pipe(map((response: Array<string>) => {
-			response.forEach(url => {
-				const item = new ResponseModel;
-				item.name = url[0];
-				item.responseUri = url[1];
-				this.responses.push(item);
+	getURLs(): Observable<Array<GroupModel>> {
+		return this.http.get('./assets/data.json').pipe(map((list: any) => {
+			list.forEach(g => {
+				const resp = new GroupModel();
+				resp.name = g[0];
+				g[1].forEach(url => {
+					const item = new ResponseModel;
+					item.name = url[0];
+					item.responseUri = url[1];
+					resp.responses.push(item);
+				});
+				this.groups.push(resp);
 			});
-			return this.responses;
+			return this.groups;
 		}));
 	}
 }

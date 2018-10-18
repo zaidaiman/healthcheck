@@ -16,29 +16,41 @@ namespace healthcheck.Controllers
         [HttpGet("[action]")]
         public JsonResult AreYouAlive(string URL)
         {
-            HttpWebRequest req = (HttpWebRequest)WebRequest.Create(URL);
-            req.AllowAutoRedirect = true;
-            req.MaximumAutomaticRedirections = 99;
-            HttpWebResponse response = new HttpWebResponse();
-            try
-            {
-                response = (HttpWebResponse)req.GetResponse();
-                var data = new ResponseModel();
-                Reflection.CopyProperties(response, data);
-                return Json(data);
+            if (Uri.IsWellFormedUriString(URL, UriKind.Absolute)) {
+                HttpWebRequest req = (HttpWebRequest)WebRequest.Create(URL);
+                req.AllowAutoRedirect = true;
+                req.MaximumAutomaticRedirections = 99;
+                HttpWebResponse response = new HttpWebResponse();
+                try
+                {
+                    response = (HttpWebResponse)req.GetResponse();
+                    var data = new ResponseModel();
+                    Reflection.CopyProperties(response, data);
+                    return Json(data);
+                }
+                catch (WebException wex)
+                {
+                    using (WebResponse rex = wex.Response)
+                    {
+                        HttpWebResponse httpRex = (HttpWebResponse)rex;
+                        var exData = new ResponseModel()
+                        {
+                            StatusCode = httpRex.StatusCode,
+                            StatusDescription = httpRex.StatusDescription,
+                            Server = req.Host
+                        };
+                        return Json(exData);
+                    }
+                }
+                finally
+                {
+                    response.Close();
+                }
             }
-            catch (Exception ex) {
-                var exData = new ResponseModel() {
-                    StatusCode = HttpStatusCode.InternalServerError,
-                    StatusDescription = "Internal Server Error: " + ex.Message,
-                    Server = req.Host
-                };
-                return Json(exData);
-            }
-            finally
-            {
-                response.Close();
-            }
+            return Json(new ResponseModel {
+                StatusCode = HttpStatusCode.Gone,
+                StatusDescription = "Gone"
+            });
         }
     }
 

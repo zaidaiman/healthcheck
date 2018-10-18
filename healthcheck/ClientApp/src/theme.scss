@@ -12,7 +12,8 @@
 // Define the default theme (same as the example above).
 $candy-app-primary: mat-palette($mat-indigo);
 $candy-app-accent:  mat-palette($mat-pink);
-$candy-app-warn: mat-palette($mat-red);
+$candy-app-warn: mat-palette($mat-amber);
+$candy-app-error: mat-palette($mat-red);
 $candy-app-good: mat-palette($mat-green);
 $candy-app-theme:   mat-light-theme($candy-app-primary, $candy-app-accent);
 
@@ -26,6 +27,10 @@ $candy-app-theme:   mat-light-theme($candy-app-primary, $candy-app-accent);
 
 .warn {
     color: mat-color($candy-app-warn);
+}
+
+.error {
+    color: mat-color($candy-app-error);
 }
 
 .good {
@@ -43,6 +48,11 @@ $candy-app-theme:   mat-light-theme($candy-app-primary, $candy-app-accent);
 .bg-warn {
     background-color: mat-color($candy-app-warn) !important;
 }
+
+.bg-error {
+    background-color: mat-color($candy-app-error) !important;
+}
+
 
 .bg-good {
     background-color: mat-color($candy-app-good) !important;

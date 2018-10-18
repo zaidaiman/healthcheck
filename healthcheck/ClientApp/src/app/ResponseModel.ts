@@ -17,3 +17,8 @@ export class ResponseModel {
 	class: string;
 	name: string;
 }
+
+export class GroupModel {
+	name: string;
+	responses: ResponseModel[] = new Array();
+}

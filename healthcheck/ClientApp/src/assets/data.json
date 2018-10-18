@@ -1,5 +1,60 @@
 [
-	["Google", "http://google.com"],
-	["Lowyat", "http://lowyat.net"],
-	["hq06eba04", "http://hq06eba04:8023"]
+  ["Internet", [
+	["Google", "http://google.com"]
+  ]],
+  ["ERS Applications @ esubmissions",
+    [
+      ["ARAS @ 8888", "https://esubmissions.seccom.com.my:8888"],
+      ["ARAS @ http", "http://esubmissions.seccom.com.my/ARAS"],
+      ["ARAS @ https", "http://esubmissions.seccom.com.my/ARAS"],
+      ["LOLA External", "https://esubmissions.seccom.com.my/LOLA"]
+    ]
+  ],
+  ["ERS Applications @ ers",
+    [
+      ["CPE Public", "https://ers.seccom.com.my/cpepublic"],
+      ["CPE Training Provider", "https://ers.seccom.com.my/trainingprovider"],
+      ["ELA MP", "https://ers.seccom.com.my/ela"],
+      ["ELA Public", "https://ers.seccom.com.my/public"]
+    ]
+  ],
+  ["ERS Applications @ internal",
+    [
+      ["CBE Exam Candidate", "http://hq06eba04/cbe.candidate"],
+      ["CBE Internal", "http://hq06eba04/cbe"],
+      ["CPE Secretariat", "http://hq06eba04/secretariat"],
+      ["ELA Accounting ", "http://hq06eba04/accounting/pending.asp"],
+      ["ELA Administrative", "http://hq06adm04/administrativetools/"],
+      ["ELA Announcement", "http://hq06eba04/announcement/Announcement.asp"],
+      
+      ["ELA Front Counter", "http://hq06eba04/frontoffice/fcSearch.asp"],
+      ["ELA Licensing", "http://hq06eba04/licensing/summary.asp"],
+      ["LOLA Internal", "http://hq06eba04:8023"],
+      ["SCARS ", "http://hq06eba04/scars"]
+    ]
+  ],
+  ["SC Internal Applications",
+    [
+      ["eSCMS", "http://escms:3009"],
+      ["eSPMS", "http://espms:3010"],
+      ["eXis", "http://hq01exs02:8080/omnidocs/login.jsp"],
+      ["HRAvenue", "http://hravenue/"],
+      ["iUse", "http://hq01ssd01/ProcessManager/"],
+      ["Technology Steering Committee", "http://hq01sps04:8060/sites/meeting"],
+      ["Wiki@SC", "http://wikisc:3000"]
+    ]
+  ],
+  ["Web Services",
+    [
+      ["WS AD", "http://hq01int02:4001/ActiveDirectoryService.asmx"],
+      ["WS ESCMS", "http://hq01int02:4007/ScmsService.asmx"],
+      ["WS HolidayService (old)", "http://hq01int02:4002/HolidayService.asmx"],
+      ["WS HolidayService", "http://hq01int02:4004/HolidayService.asmx"],
+      ["WS HRAvenue", "http://hq01int02:4005/HrAvenueService.asmx"],
+      ["WS MSSP", "http://hq01int02:4008/msspsservice.asmx"],
+      ["WS RunServices", "http://hq01int02:4003/RunServices.asmx"],
+      ["WS Search", "http://hq01int02:4003/Search.asmx"],
+      ["WS ServiceImplementation", "http://hq01int02:4006/ServiceImplementation.asmx"]
+    ]
+  ]
 ]
