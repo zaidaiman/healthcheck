@@ -17,12 +17,23 @@ namespace healthcheck.Controllers
         public JsonResult AreYouAlive(string URL)
         {
             HttpWebRequest req = (HttpWebRequest)WebRequest.Create(URL);
-            HttpWebResponse response = (HttpWebResponse)req.GetResponse();
+            req.AllowAutoRedirect = true;
+            req.MaximumAutomaticRedirections = 99;
+            HttpWebResponse response = new HttpWebResponse();
             try
             {
+                response = (HttpWebResponse)req.GetResponse();
                 var data = new ResponseModel();
                 Reflection.CopyProperties(response, data);
                 return Json(data);
+            }
+            catch (Exception ex) {
+                var exData = new ResponseModel() {
+                    StatusCode = HttpStatusCode.InternalServerError,
+                    StatusDescription = "Internal Server Error: " + ex.Message,
+                    Server = req.Host
+                };
+                return Json(exData);
             }
             finally
             {
