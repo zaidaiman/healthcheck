@@ -8,7 +8,14 @@ export class SearchPipePipe implements PipeTransform {
 
 	transform(value: ResponseModel[], searchterm: string): any {
 		if (!searchterm) { return value; }
-		return value.filter(x => x.server.includes(searchterm) || x.name.includes(searchterm) || x.responseUri.includes(searchterm));
+		var num = Number(searchterm);
+		return value.filter(x => 
+			x.server.includes(searchterm) || 
+			x.name.includes(searchterm) ||
+			x.responseUri.includes(searchterm) || 
+			x.statusCode===num ||
+			x.statusDescription.includes(searchterm)
+		);
 	}
 
 }
