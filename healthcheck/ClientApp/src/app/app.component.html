@@ -1,0 +1,40 @@
+<div class="container">
+	<mat-toolbar color="primary">
+		<i class="fas fa-heartbeat mat-icon"></i>
+		&nbsp;&nbsp;&nbsp;
+		<span>{{ title }}</span>
+		<span class="spacer"></span>
+	</mat-toolbar>
+	<br />
+	<div fxLayout="row" fxLayoutAlign="center stretch">
+		<div fxFlex="20"></div>
+		<div fxFlex="60">
+			<mat-form-field fxFlex="100">
+				<input #searchInput matInput placeholder="Search">
+			</mat-form-field>
+		</div>
+		<div fxFlex="20"></div>
+	</div>
+
+	<div fxLayout="row wrap" fxLayoutAlign="center stretch">
+		<mat-card *ngFor="let resp of responses | search:searchInput.value" fxLayout="column" fxLayoutAlign="space-between start"
+		 fxFlex.gt-lg="18" fxFlex.md="30" fxFlex.sm="48" [ngClass]="resp.class">
+			<mat-card-header>
+				<div mat-card-avatar>
+					<i class="fas fa-check-circle fa-2x" *ngIf="resp.statusCode===200"></i>
+					<i class="fas fa-exclamation-circle fa-2x" *ngIf="resp.statusCode!==200"></i>
+				</div>
+				<mat-card-title>
+					<b>{{resp.name}}</b>
+				</mat-card-title>
+			</mat-card-header>
+			<mat-card-content>
+				<div fxFlex="100">
+					<h2>{{resp.statusCode}} {{resp.statusDescription}}</h2>
+					<a target="_blank" class="dont-break-out" href="{{resp.responseUri}}">{{resp.responseUri}}</a>
+					<mat-progress-bar mode="indeterminate" *ngIf="!resp.loaded"></mat-progress-bar>
+				</div>
+			</mat-card-content>
+		</mat-card>
+	</div>
+</div>
