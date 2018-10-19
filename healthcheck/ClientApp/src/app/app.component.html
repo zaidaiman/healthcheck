@@ -17,12 +17,13 @@
     </div>
     <div fxLayout="row wrap" fxLayoutAlign="start stretch">
       <mat-card *ngFor="let resp of g.responses | search:searchInput.value" fxLayout="column" fxLayoutAlign="space-between start"
-        fxFlex="20" [ngClass]="resp.class">
+        fxFlex="20" fxFlex.xl="20" fxFlex.lg="20" fxFlex.md="40" fxFlex.sm="100" fxFlex.xs="100" [ngClass]="resp.class">
         <mat-card-header>
           <div mat-card-avatar>
-            <i class="fas fa-check-circle fa-2x" *ngIf="resp.statusCode===200"></i>
-            <i class="fas fa-exclamation-circle fa-2x" *ngIf="resp.statusCode===401"></i>
-            <i class="fas fa-times-circle fa-2x" *ngIf="resp.statusCode!==200 && resp.statusCode!==401"></i>
+            <i class="fas fa-info-circle fa-2x" *ngIf="resp.class==='bg-info'"></i>
+            <i class="fas fa-check-circle fa-2x" *ngIf="resp.class==='bg-good'"></i>
+            <i class="fas fa-exclamation-circle fa-2x" *ngIf="resp.class==='bg-warn'"></i>
+            <i class="fas fa-times-circle fa-2x" *ngIf="resp.class==='bg-error'"></i>
           </div>
           <mat-card-title class="dont-break-out">
             <b>{{resp.name}}</b>

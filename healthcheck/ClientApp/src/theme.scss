@@ -11,51 +11,58 @@
 
 // Define the default theme (same as the example above).
 $candy-app-primary: mat-palette($mat-indigo);
-$candy-app-accent:  mat-palette($mat-pink);
+$candy-app-accent: mat-palette($mat-pink);
 $candy-app-warn: mat-palette($mat-amber);
 $candy-app-error: mat-palette($mat-red);
 $candy-app-good: mat-palette($mat-green);
-$candy-app-theme:   mat-light-theme($candy-app-primary, $candy-app-accent);
+$candy-app-info: mat-palette($mat-blue);
+$candy-app-theme: mat-light-theme($candy-app-primary, $candy-app-accent);
 
 .primary {
-    color: mat-color($candy-app-primary);
+  color: mat-color($candy-app-primary);
 }
 
 .accent {
-    color: mat-color($candy-app-accent);
+  color: mat-color($candy-app-accent);
 }
 
 .warn {
-    color: mat-color($candy-app-warn);
+  color: mat-color($candy-app-warn);
 }
 
 .error {
-    color: mat-color($candy-app-error);
+  color: mat-color($candy-app-error);
 }
 
 .good {
-    color: mat-color($candy-app-good);
+  color: mat-color($candy-app-good);
+}
+
+.info {
+  color: mat-color($candy-app-info);
 }
 
 .bg-primary {
-    background-color: mat-color($candy-app-primary) !important;
+  background-color: mat-color($candy-app-primary) !important;
 }
 
 .bg-accent {
-    background-color: mat-color($candy-app-accent) !important;
+  background-color: mat-color($candy-app-accent) !important;
 }
 
 .bg-warn {
-    background-color: mat-color($candy-app-warn) !important;
+  background-color: mat-color($candy-app-warn) !important;
 }
 
 .bg-error {
-    background-color: mat-color($candy-app-error) !important;
+  background-color: mat-color($candy-app-error) !important;
 }
 
-
+.bg-info {
+  background-color: mat-color($candy-app-info) !important;
+}
 .bg-good {
-    background-color: mat-color($candy-app-good) !important;
+  background-color: mat-color($candy-app-good) !important;
 }
 
 // Include the default theme styles.
@@ -64,9 +71,9 @@ $candy-app-theme:   mat-light-theme($candy-app-primary, $candy-app-accent);
 
 // Define an alternate dark theme.
 $dark-primary: mat-palette($mat-blue-grey);
-$dark-accent:  mat-palette($mat-amber, A200, A100, A400);
-$dark-warn:    mat-palette($mat-deep-orange);
-$dark-theme:   mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
+$dark-accent: mat-palette($mat-amber, A200, A100, A400);
+$dark-warn: mat-palette($mat-deep-orange);
+$dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
 
 // Include the alternative theme styles inside of a block with a CSS class. You can make this
 // CSS class whatever you want. In this example, any component inside of an element with

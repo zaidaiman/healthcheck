@@ -10,11 +10,11 @@ export class SearchPipePipe implements PipeTransform {
 		if (!searchterm) { return value; }
 		var num = Number(searchterm);
 		return value.filter(x => 
-			x.server.includes(searchterm) || 
-			x.name.includes(searchterm) ||
-			x.responseUri.includes(searchterm) || 
+			x.server.toLowerCase().includes(searchterm) || 
+			x.name.toLowerCase().includes(searchterm) ||
+			x.responseUri.toLowerCase().includes(searchterm) || 
 			x.statusCode===num ||
-			x.statusDescription.includes(searchterm)
+			x.statusDescription.toLowerCase().includes(searchterm)
 		);
 	}
 

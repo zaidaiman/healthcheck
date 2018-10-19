@@ -7,7 +7,8 @@
       ["ARAS @ 8888", "https://esubmissions.seccom.com.my:8888"],
       ["ARAS @ http", "http://esubmissions.seccom.com.my/ARAS"],
       ["ARAS @ https", "http://esubmissions.seccom.com.my/ARAS"],
-      ["LOLA External", "https://esubmissions.seccom.com.my/LOLA"]
+      ["LOLA External", "https://esubmissions.seccom.com.my/LOLA"],
+      ["SCORE", "https://careersatsc.seccom.com.my/career/"]
     ]
   ],
   ["ERS Applications @ ers",
@@ -30,7 +31,8 @@
       ["ELA Front Counter", "http://hq06eba04/frontoffice/fcSearch.asp"],
       ["ELA Licensing", "http://hq06eba04/licensing/summary.asp"],
       ["LOLA Internal", "http://hq06eba04:8023"],
-      ["SCARS ", "http://hq06eba04/scars"]
+      ["SCARS ", "http://hq06eba04/scars"],
+      ["CRM", "http://hq06eba05:8080/login.aspx"]
     ]
   ],
   ["SC Internal Applications",
@@ -41,7 +43,8 @@
       ["HRAvenue", "http://hravenue/"],
       ["iUse", "http://hq01ssd01/ProcessManager/"],
       ["Technology Steering Committee", "http://hq01sps04:8060/sites/meeting"],
-      ["Wiki@SC", "http://wikisc:3000"]
+      ["Wiki@SC", "http://wikisc:3000"],
+      ["Call Center", "http://ciocallcenter/callcenter/agent/login.php"]
     ]
   ],
   ["Web Services",

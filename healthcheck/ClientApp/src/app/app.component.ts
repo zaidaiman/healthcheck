@@ -36,8 +36,10 @@ export class AppComponent implements OnInit {
 						item.protocolVersion = x.protocolVersion;
 						item.server = x.server;
 						item.supportHeaders = x.supportHeaders;
-						if (item.statusCode === 200) { item.class = 'bg-good'; } 
-						else if (item.statusCode === 401) { item.class = 'bg-warn' }
+
+						if (item.statusCode >= 100 && item.statusCode < 200) { item.class = 'bg-info'; } 
+						else if (item.statusCode >= 200 && item.statusCode < 300) { item.class = 'bg-good'; } 
+						else if (item.statusCode >= 300 && item.statusCode < 500) { item.class = 'bg-warn'; } 
 						else { item.class = 'bg-error'; }
 					}, error => {
 						console.log(error);
