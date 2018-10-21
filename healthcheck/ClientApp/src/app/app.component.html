@@ -1,42 +1,113 @@
 <mat-toolbar color="primary">
-  <i class="fas fa-heartbeat mat-icon"></i>
-  &nbsp;&nbsp;&nbsp;
-  <span>{{ title }}</span>
-  <span class="spacer"></span>
+	<i class="fas fa-heartbeat mat-icon"></i>
+	&nbsp;&nbsp;&nbsp;
+	<span>{{ title }}</span>
+	<span class="spacer"></span>
 </mat-toolbar>
 <br />
 <div class="container">
-  <mat-form-field class="search-form">
-    <input #searchInput matInput placeholder="Search">
-  </mat-form-field>
-  <br />
-  <div *ngFor="let g of groups">
-    <div>
-      <h2 mat-subheader>{{g.name}}</h2>
-      <mat-divider></mat-divider>
-    </div>
-    <div fxLayout="row wrap" fxLayoutAlign="start stretch">
-      <mat-card *ngFor="let resp of g.responses | search:searchInput.value" fxLayout="column" fxLayoutAlign="space-between start"
-        fxFlex="20" fxFlex.xl="20" fxFlex.lg="20" fxFlex.md="40" fxFlex.sm="100" fxFlex.xs="100" [ngClass]="resp.class">
-        <mat-card-header>
-          <div mat-card-avatar>
-            <i class="fas fa-info-circle fa-2x" *ngIf="resp.class==='bg-info'"></i>
-            <i class="fas fa-check-circle fa-2x" *ngIf="resp.class==='bg-good'"></i>
-            <i class="fas fa-exclamation-circle fa-2x" *ngIf="resp.class==='bg-warn'"></i>
-            <i class="fas fa-times-circle fa-2x" *ngIf="resp.class==='bg-error'"></i>
-          </div>
-          <mat-card-title class="dont-break-out">
-            <b>{{resp.name}}</b>
-          </mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <div fxFlex="100">
-            <h2>{{resp.statusCode}} {{resp.statusDescription}}</h2>
-            <a target="_blank" class="dont-break-out" href="{{resp.responseUri}}">{{resp.responseUri}}</a>
-            <mat-progress-bar mode="indeterminate" *ngIf="!resp.loaded"></mat-progress-bar>
-          </div>
-        </mat-card-content>
-      </mat-card>
-    </div>
-  </div>
+	<div fxLayout="row wrap" fxLayoutAlign="space-around center">
+		<div fxFlex="80" fxFlex.md="95" fxFlex.sm="95" fxFlex.xs="95">
+			<mat-form-field class="search-form">
+				<input #searchInput matInput placeholder="Search" cdkFocusInitial>
+			</mat-form-field>
+		</div>
+	</div>
+	<div fxLayout="row wrap" fxLayoutAlign="space-around stretch">
+		<div fxFlex="80" fxFlex.md="95" fxFlex.sm="95" fxFlex.xs="95">
+			<div fxLayout="row wrap" fxLayoutAlign="space-around stretch">
+				<mat-card fxLayout="column" fxLayoutAlign="space-between start" fxFlex="100" fxFlex.xl="24" fxFlex.lg="24" fxFlex.md="23" fxFlex.sm="48" fxFlex.xs="46">
+					<mat-card-header>
+						<div mat-card-avatar>
+							<i class="fas fa-info-circle info fa-4x"></i>
+						</div>
+						<mat-card-title class="dont-break-out">{{info}}</mat-card-title>
+						<mat-card-subtitle>Info</mat-card-subtitle>
+					</mat-card-header>
+				</mat-card>
+
+				<mat-card fxLayout="column" fxLayoutAlign="space-between start" fxFlex="100" fxFlex.xl="24" fxFlex.lg="24" fxFlex.md="23" fxFlex.sm="48" fxFlex.xs="46">
+					<mat-card-header>
+						<div mat-card-avatar>
+							<i class="fas fa-check-circle good fa-4x"></i>
+						</div>
+						<mat-card-title class="dont-break-out">{{good}}</mat-card-title>
+						<mat-card-subtitle>Good</mat-card-subtitle>
+					</mat-card-header>
+				</mat-card>
+
+				<mat-card fxLayout="column" fxLayoutAlign="space-between start" fxFlex="100" fxFlex.xl="24" fxFlex.lg="24" fxFlex.md="23" fxFlex.sm="48" fxFlex.xs="46">
+					<mat-card-header>
+						<div mat-card-avatar>
+							<i class="fas fa-exclamation-circle warn fa-4x"></i>
+						</div>
+						<mat-card-title class="dont-break-out">{{warn}}</mat-card-title>
+						<mat-card-subtitle>Warn</mat-card-subtitle>
+					</mat-card-header>
+				</mat-card>
+
+				<mat-card fxLayout="column" fxLayoutAlign="space-between start" fxFlex="100" fxFlex.xl="24" fxFlex.lg="24" fxFlex.md="23" fxFlex.sm="48" fxFlex.xs="46">
+					<mat-card-header>
+						<div mat-card-avatar>
+							<i class="fas fa-times-circle error fa-4x"></i>
+						</div>
+						<mat-card-title class="dont-break-out">{{error}}</mat-card-title>
+						<mat-card-subtitle>Error</mat-card-subtitle>
+					</mat-card-header>
+				</mat-card>
+			</div>
+		</div>
+	</div>
+	<div fxLayout="row wrap" fxLayoutAlign="space-around center">
+		<div fxFlex="80" fxFlex.md="95" fxFlex.sm="95" fxFlex.xs="95">
+			<mat-list>
+				<div *ngFor="let g of groups">
+					<h3 mat-subheader>{{g.name}}</h3>
+					<mat-list-item *ngFor="let resp of g.responses | search:searchInput.value">
+						<div class="mat-icon" mat-list-icon>
+							<i class="fas fa-info-circle info" *ngIf="resp.class==='bg-info'"></i>
+							<i class="fas fa-check-circle good" *ngIf="resp.class==='bg-good'"></i>
+							<i class="fas fa-exclamation-circle warn" *ngIf="resp.class==='bg-warn'"></i>
+							<i class="fas fa-times-circle error" *ngIf="resp.class==='bg-error'"></i>
+						</div>
+						<!-- <mat-icon mat-list-icon>folder</mat-icon> -->
+						<h4 mat-line>{{resp.name}}</h4>
+						<p mat-line><a target="_blank" class="dont-break-out" href="{{resp.responseUri}}">{{resp.responseUri}}</a></p>
+						<mat-progress-bar mode="indeterminate" *ngIf="!resp.loaded"></mat-progress-bar>
+						<p class="spacer right">{{resp.statusCode}} {{resp.statusDescription}}</p>
+					</mat-list-item>
+					<mat-divider></mat-divider>
+				</div>
+			</mat-list>
+		</div>
+	</div>
+
+
+	<!-- <div *ngFor="let g of groups" class="list-cards">
+		<div>
+			<h2 mat-subheader>{{g.name}}</h2>
+			<mat-divider></mat-divider>
+		</div>
+		<div fxLayout="row wrap" fxLayoutAlign="start stretch">
+			<mat-card *ngFor="let resp of g.responses | search:searchInput.value" fxLayout="column" fxLayoutAlign="space-between start"
+			 fxFlex="20" fxFlex.xl="20" fxFlex.lg="20" fxFlex.md="40" fxFlex.sm="100" fxFlex.xs="100" [ngClass]="resp.class">
+				<mat-card-header>
+					<div mat-card-avatar>
+						<i class="fas fa-info-circle" *ngIf="resp.class==='bg-info'"></i>
+						<i class="fas fa-check-circle" *ngIf="resp.class==='bg-good'"></i>
+						<i class="fas fa-exclamation-circle" *ngIf="resp.class==='bg-warn'"></i>
+						<i class="fas fa-times-circle" *ngIf="resp.class==='bg-error'"></i>
+					</div>
+					<mat-card-title class="dont-break-out">{{resp.name}}</mat-card-title>
+					<mat-card-subtitle><a target="_blank" class="dont-break-out" href="{{resp.responseUri}}">{{resp.responseUri}}</a></mat-card-subtitle>
+				</mat-card-header>
+				<mat-card-content>
+					<div fxFlex="100">
+						<h2>{{resp.statusCode}} {{resp.statusDescription}}</h2>
+						
+					</div>
+				</mat-card-content>
+			</mat-card>
+		</div>
+	</div> -->
 </div>

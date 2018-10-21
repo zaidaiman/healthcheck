@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ApiService } from './api.service';
 import { ResponseModel, GroupModel } from './responseModel';
 import { HttpClient } from '@angular/common/http';
@@ -13,10 +13,17 @@ import { map } from 'rxjs/operators';
 export class AppComponent implements OnInit {
 	title = 'Health Check';
 	groups: GroupModel[] = new Array();
+	info = 0;
+	good = 0;
+	warn = 0;
+	error = 0;
+	@ViewChild('searchInput') searchInput: ElementRef;
 
 	constructor(private apiService: ApiService) { }
 
 	ngOnInit() {
+		this.searchInput.nativeElement.focus();
+
 		this.apiService.getURLs().subscribe(list => {
 			this.groups = list;
 
@@ -37,10 +44,19 @@ export class AppComponent implements OnInit {
 						item.server = x.server;
 						item.supportHeaders = x.supportHeaders;
 
-						if (item.statusCode >= 100 && item.statusCode < 200) { item.class = 'bg-info'; } 
-						else if (item.statusCode >= 200 && item.statusCode < 300) { item.class = 'bg-good'; } 
-						else if (item.statusCode >= 300 && item.statusCode < 500) { item.class = 'bg-warn'; } 
-						else { item.class = 'bg-error'; }
+						if (item.statusCode >= 100 && item.statusCode < 200) {
+							item.class = 'bg-info';
+							this.info += 1;
+						} else if (item.statusCode >= 200 && item.statusCode < 300) {
+							item.class = 'bg-good';
+							this.good += 1;
+						} else if (item.statusCode >= 300 && item.statusCode < 500) {
+							item.class = 'bg-warn';
+							this.warn += 1;
+						} else {
+							item.class = 'bg-error';
+							this.error += 1;
+						}
 					}, error => {
 						console.log(error);
 						item.loaded = true;

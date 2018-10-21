@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Hangfire;
+using Hangfire.MemoryStorage;
 
 namespace healthcheck
 {
@@ -26,6 +28,8 @@ namespace healthcheck
             {
                 configuration.RootPath = "ClientApp/dist/healthcheck";
             });
+
+            services.AddHangfire(x => x.UseMemoryStorage());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -62,6 +66,10 @@ namespace healthcheck
                     spa.UseAngularCliServer(npmScript: "start");
                 }
             });
+
+
+            app.UseHangfireServer();
+            app.UseHangfireDashboard();
         }
     }
 }

@@ -9,7 +9,6 @@ body {
 
 html,
 body,
-.container,
 .content,
 .app-background {
     margin: 0;
@@ -29,7 +28,7 @@ app-root:empty+.loading {
 
 a,
 a:visited {
-    color: #fff;
+    color: #0033ff;
 }
 
 .dont-break-out {
@@ -48,20 +47,23 @@ a:visited {
     hyphens: auto;
 }
 
-.container {
-    flex: 1;
-    // width: 100%;
-    // min-width: 100%;
-    // height: 100%;
-    // min-height: 100%;
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto;
-}
+// .container {
+//     // width: 100%;
+//     // min-width: 100%;
+//     // height: 100%;
+//     // min-height: 100%;
+//     padding-right: 15px;
+//     padding-left: 15px;
+//     margin-right: auto;
+//     margin-left: auto;
+// }
 
 .wrapper {
     padding: 10px 24px;
+}
+
+.mat-card-header-text {
+	margin: 0 40px !important;
 }
 
 .mat-card-content {
@@ -69,13 +71,24 @@ a:visited {
 }
 
 .mat-card-title {
-    font-size: 24px !important;
+	font-size: 35px !important;
+	margin-bottom: 8px !important;
+}
+
+.mat-card-subtitle {
+	font-size: 20px !important;
+}
+
+.mat-card-actions, .mat-card-content, .mat-card-subtitle {
+	margin-bottom: 0px !important;
 }
 
 .spacer {
     flex: 1 1 auto;
 }
-
+.right {
+	text-align: right;
+}
 .search-form {
     width: 100%;
   }

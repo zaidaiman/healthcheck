@@ -33,6 +33,15 @@ namespace healthcheck.Controllers
                     using (WebResponse rex = wex.Response)
                     {
                         HttpWebResponse httpRex = (HttpWebResponse)rex;
+                        if (httpRex == null)
+                        {
+                            return Json(new ResponseModel
+                            {
+                                StatusCode = HttpStatusCode.Gone,
+                                StatusDescription = "Gone"
+                            });
+                        }
+
                         var exData = new ResponseModel()
                         {
                             StatusCode = httpRex.StatusCode,
