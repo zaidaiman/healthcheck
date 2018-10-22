@@ -16,7 +16,8 @@
 	<div fxLayout="row wrap" fxLayoutAlign="space-around stretch">
 		<div fxFlex="80" fxFlex.md="95" fxFlex.sm="95" fxFlex.xs="95">
 			<div fxLayout="row wrap" fxLayoutAlign="space-around stretch">
-				<mat-card fxLayout="column" fxLayoutAlign="space-between start" fxFlex="100" fxFlex.xl="24" fxFlex.lg="24" fxFlex.md="23" fxFlex.sm="48" fxFlex.xs="46">
+				<mat-card fxLayout="column" fxLayoutAlign="space-between start" fxFlex="100" fxFlex.xl="24" fxFlex.lg="24"
+				 fxFlex.md="23" fxFlex.sm="48" fxFlex.xs="46">
 					<mat-card-header>
 						<div mat-card-avatar>
 							<i class="fas fa-info-circle info fa-4x"></i>
@@ -26,7 +27,8 @@
 					</mat-card-header>
 				</mat-card>
 
-				<mat-card fxLayout="column" fxLayoutAlign="space-between start" fxFlex="100" fxFlex.xl="24" fxFlex.lg="24" fxFlex.md="23" fxFlex.sm="48" fxFlex.xs="46">
+				<mat-card fxLayout="column" fxLayoutAlign="space-between start" fxFlex="100" fxFlex.xl="24" fxFlex.lg="24"
+				 fxFlex.md="23" fxFlex.sm="48" fxFlex.xs="46">
 					<mat-card-header>
 						<div mat-card-avatar>
 							<i class="fas fa-check-circle good fa-4x"></i>
@@ -36,7 +38,8 @@
 					</mat-card-header>
 				</mat-card>
 
-				<mat-card fxLayout="column" fxLayoutAlign="space-between start" fxFlex="100" fxFlex.xl="24" fxFlex.lg="24" fxFlex.md="23" fxFlex.sm="48" fxFlex.xs="46">
+				<mat-card fxLayout="column" fxLayoutAlign="space-between start" fxFlex="100" fxFlex.xl="24" fxFlex.lg="24"
+				 fxFlex.md="23" fxFlex.sm="48" fxFlex.xs="46">
 					<mat-card-header>
 						<div mat-card-avatar>
 							<i class="fas fa-exclamation-circle warn fa-4x"></i>
@@ -46,7 +49,8 @@
 					</mat-card-header>
 				</mat-card>
 
-				<mat-card fxLayout="column" fxLayoutAlign="space-between start" fxFlex="100" fxFlex.xl="24" fxFlex.lg="24" fxFlex.md="23" fxFlex.sm="48" fxFlex.xs="46">
+				<mat-card fxLayout="column" fxLayoutAlign="space-between start" fxFlex="100" fxFlex.xl="24" fxFlex.lg="24"
+				 fxFlex.md="23" fxFlex.sm="48" fxFlex.xs="46">
 					<mat-card-header>
 						<div mat-card-avatar>
 							<i class="fas fa-times-circle error fa-4x"></i>
@@ -60,25 +64,39 @@
 	</div>
 	<div fxLayout="row wrap" fxLayoutAlign="space-around center">
 		<div fxFlex="80" fxFlex.md="95" fxFlex.sm="95" fxFlex.xs="95">
-			<mat-list>
-				<div *ngFor="let g of groups">
-					<h3 mat-subheader>{{g.name}}</h3>
-					<mat-list-item *ngFor="let resp of g.responses | search:searchInput.value">
-						<div class="mat-icon" mat-list-icon>
-							<i class="fas fa-info-circle info" *ngIf="resp.class==='bg-info'"></i>
-							<i class="fas fa-check-circle good" *ngIf="resp.class==='bg-good'"></i>
-							<i class="fas fa-exclamation-circle warn" *ngIf="resp.class==='bg-warn'"></i>
-							<i class="fas fa-times-circle error" *ngIf="resp.class==='bg-error'"></i>
-						</div>
-						<!-- <mat-icon mat-list-icon>folder</mat-icon> -->
-						<h4 mat-line>{{resp.name}}</h4>
-						<p mat-line><a target="_blank" class="dont-break-out" href="{{resp.responseUri}}">{{resp.responseUri}}</a></p>
-						<mat-progress-bar mode="indeterminate" *ngIf="!resp.loaded"></mat-progress-bar>
-						<p class="spacer right">{{resp.statusCode}} {{resp.statusDescription}}</p>
-					</mat-list-item>
-					<mat-divider></mat-divider>
+			<div fxLayout="column" fxLayoutAlign="start start" fxFlex="80" fxFlex.sm="100" fxFlex.xs="100">
+				<mat-list>
+					<div *ngFor="let g of groups">
+						<h3 mat-subheader id="{{g.name}}">{{g.name}}</h3>
+						<mat-list-item *ngFor="let resp of g.responses | search:searchInput.value">
+							<div class="mat-icon" mat-list-icon>
+								<i class="fas fa-info-circle info" *ngIf="resp.class==='bg-info'"></i>
+								<i class="fas fa-check-circle good" *ngIf="resp.class==='bg-good'"></i>
+								<i class="fas fa-exclamation-circle warn" *ngIf="resp.class==='bg-warn'"></i>
+								<i class="fas fa-times-circle error" *ngIf="resp.class==='bg-error'"></i>
+							</div>
+							<!-- <mat-icon mat-list-icon>folder</mat-icon> -->
+							<h4 mat-line>{{resp.name}}</h4>
+							<p mat-line><a target="_blank" class="dont-break-out" href="{{resp.responseUri}}">{{resp.responseUri}}</a></p>
+							<mat-progress-bar mode="indeterminate" *ngIf="!resp.loaded"></mat-progress-bar>
+							<p class="spacer right">{{resp.statusCode}} {{resp.statusDescription}}</p>
+						</mat-list-item>
+						<mat-divider></mat-divider>
+					</div>
+				</mat-list>
+			</div>
+			<div fxLayout="column" fxLayoutAlign="start start" fxFlex="20" fxHide.sm="true" fxHide.xs="true">
+				<div class="mat-drawer-content">
+					<div class="docs-toc-container">
+						<div class="docs-toc-heading">Contents</div>
+						<nav>
+							<a href="#{{g.name}}" *ngFor="let g of groups; let i = index" class="docs-level-h4 docs-link">
+								{{g.name}}
+							</a>
+						</nav>
+					</div>
 				</div>
-			</mat-list>
+			</div>
 		</div>
 	</div>
 
