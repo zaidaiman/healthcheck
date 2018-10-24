@@ -65,8 +65,9 @@
 	<div fxLayout="row wrap" fxLayoutAlign="space-around center">
 		<div fxFlex="80" fxFlex.md="95" fxFlex.sm="95" fxFlex.xs="95">
 			<div fxLayout="column" fxLayoutAlign="start start" fxFlex="80" fxFlex.sm="100" fxFlex.xs="100">
+				<br />
 				<div>
-					<mat-slide-toggle [(ngModel)]="checked">Toggle View</mat-slide-toggle>
+					&nbsp;&nbsp;<mat-slide-toggle [(ngModel)]="checked">Toggle List/Card View</mat-slide-toggle>
 				</div>
 				<mat-list *ngIf="!checked">
 					<div *ngFor="let g of groups">
