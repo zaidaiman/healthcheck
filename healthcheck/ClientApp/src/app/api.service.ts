@@ -23,6 +23,14 @@ export class ApiService {
 			}));
 	}
 
+	screenshot(URL: string): Observable<ResponseModel> {
+		const headers = new HttpHeaders();
+		return this.http.get(this.baseUrl + 'api/Alive/Screenshot?URL=' + URL, { headers: headers })
+			.pipe(map((response: ResponseModel) => {
+				return response;
+			}));
+	}
+
 	getURLs(): Observable<Array<GroupModel>> {
 		return this.http.get('./assets/data.json').pipe(map((list: any) => {
 			list.forEach(g => {

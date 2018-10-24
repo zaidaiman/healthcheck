@@ -16,6 +16,7 @@ export class ResponseModel {
 	loaded = false;
 	class: string;
 	name: string;
+	image: string;
 }
 
 export class GroupModel {

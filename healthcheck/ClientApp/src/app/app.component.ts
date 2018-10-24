@@ -17,6 +17,7 @@ export class AppComponent implements OnInit {
 	good = 0;
 	warn = 0;
 	error = 0;
+	checked = false;
 	@ViewChild('searchInput') searchInput: ElementRef;
 
 	constructor(private apiService: ApiService) { }
@@ -29,6 +30,10 @@ export class AppComponent implements OnInit {
 
 			this.groups.forEach(group => {
 				group.responses.forEach(item => {
+					this.apiService.screenshot(item.responseUri).subscribe(x => {
+						console.log(x);
+						item.image = x.image;
+					});
 					this.apiService.areYouAlive(item.responseUri).subscribe(x => {
 						item.loaded = true;
 						item.characterSet = x.characterSet;

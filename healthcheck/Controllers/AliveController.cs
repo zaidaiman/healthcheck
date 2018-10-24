@@ -5,8 +5,10 @@ using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using System;
+using System.Threading.Tasks;
 using System.Reflection;
+using OpenQA.Selenium.Chrome;
+using System.IO;
 
 namespace healthcheck.Controllers
 {
@@ -60,6 +62,35 @@ namespace healthcheck.Controllers
                 StatusCode = HttpStatusCode.Gone,
                 StatusDescription = "Gone"
             });
+        }
+
+        [HttpGet("[action]")]
+        public JsonResult Screenshot(string URL)
+        {
+            var result = Task.Factory.StartNew(() => ThreadScreenshot(URL));
+            return result.Result;
+        }
+
+        private JsonResult ThreadScreenshot(string URL) {
+            try
+            {
+                var options = new ChromeOptions();
+                options.AddArguments("headless");
+                using (var driver = new ChromeDriver(options))
+                {
+                    var folder = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+                    var path = string.Format("{0}-{1}.png", folder, Guid.NewGuid().ToString());
+
+                    driver.Navigate().GoToUrl(URL);
+                    //driver.GetScreenshot().SaveAsFile(path, OpenQA.Selenium.ScreenshotImageFormat.Png);
+                    var img = driver.GetScreenshot().AsBase64EncodedString;
+                    return Json(new { OK = true, image = img });
+                }
+            }
+            catch (Exception ex)
+            {
+                return Json(new { OK = false, message = ex });
+            }
         }
     }
 

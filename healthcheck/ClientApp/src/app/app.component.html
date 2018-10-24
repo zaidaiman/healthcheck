@@ -15,7 +15,7 @@
 	</div>
 	<div fxLayout="row wrap" fxLayoutAlign="space-around stretch">
 		<div fxFlex="80" fxFlex.md="95" fxFlex.sm="95" fxFlex.xs="95">
-			<div fxLayout="row wrap" fxLayoutAlign="space-around stretch">
+			<div fxLayout="row wrap" fxLayoutAlign="space-around stretch" class="summary">
 				<mat-card fxLayout="column" fxLayoutAlign="space-between start" fxFlex="100" fxFlex.xl="24" fxFlex.lg="24"
 				 fxFlex.md="23" fxFlex.sm="48" fxFlex.xs="46">
 					<mat-card-header>
@@ -65,7 +65,10 @@
 	<div fxLayout="row wrap" fxLayoutAlign="space-around center">
 		<div fxFlex="80" fxFlex.md="95" fxFlex.sm="95" fxFlex.xs="95">
 			<div fxLayout="column" fxLayoutAlign="start start" fxFlex="80" fxFlex.sm="100" fxFlex.xs="100">
-				<mat-list>
+				<div>
+					<mat-slide-toggle [(ngModel)]="checked">Toggle View</mat-slide-toggle>
+				</div>
+				<mat-list *ngIf="!checked">
 					<div *ngFor="let g of groups">
 						<h3 mat-subheader id="{{g.name}}">{{g.name}}</h3>
 						<mat-list-item *ngFor="let resp of g.responses | search:searchInput.value">
@@ -75,15 +78,46 @@
 								<i class="fas fa-exclamation-circle warn" *ngIf="resp.class==='bg-warn'"></i>
 								<i class="fas fa-times-circle error" *ngIf="resp.class==='bg-error'"></i>
 							</div>
-							<!-- <mat-icon mat-list-icon>folder</mat-icon> -->
 							<h4 mat-line>{{resp.name}}</h4>
-							<p mat-line><a target="_blank" class="dont-break-out" href="{{resp.responseUri}}">{{resp.responseUri}}</a></p>
+							<p mat-line>
+								<a target="_blank" class="dont-break-out" href="{{resp.responseUri}}">{{resp.responseUri}}</a>
+							</p>
 							<mat-progress-bar mode="indeterminate" *ngIf="!resp.loaded"></mat-progress-bar>
 							<p class="spacer right">{{resp.statusCode}} {{resp.statusDescription}}</p>
 						</mat-list-item>
 						<mat-divider></mat-divider>
 					</div>
 				</mat-list>
+
+				<div *ngIf="checked">
+					<div *ngFor="let g of groups" class="list-cards">
+						<div style="width:100%">
+							<h2 mat-subheader>{{g.name}}</h2>
+							<mat-divider></mat-divider>
+						</div>
+						<div fxLayout="row wrap" fxLayoutAlign="start stretch">
+							<mat-card *ngFor="let resp of g.responses | search:searchInput.value" fxLayout="column" fxLayoutAlign="space-between start"
+							 fxFlex="30" fxFlex.xl="30" fxFlex.lg="30" fxFlex.md="30" fxFlex.sm="48" fxFlex.xs="48">
+								<mat-card-header>
+									<div mat-card-avatar>
+										<i class="fas fa-info-circle" *ngIf="resp.class==='bg-info'"></i>
+										<i class="fas fa-check-circle" *ngIf="resp.class==='bg-good'"></i>
+										<i class="fas fa-exclamation-circle" *ngIf="resp.class==='bg-warn'"></i>
+										<i class="fas fa-times-circle" *ngIf="resp.class==='bg-error'"></i>
+									</div>
+									<mat-card-title class="dont-break-out">{{resp.name}}</mat-card-title>
+									<mat-card-subtitle><a target="_blank" class="dont-break-out" href="{{resp.responseUri}}">{{resp.responseUri}}</a></mat-card-subtitle>
+								</mat-card-header>
+								<img mat-card-image src="data:image/png;base64,{{resp.image}}" />
+								<mat-card-content>
+									<div fxFlex="100">
+										{{resp.statusCode}} {{resp.statusDescription}}
+									</div>
+								</mat-card-content>
+							</mat-card>
+						</div>
+					</div>
+				</div>
 			</div>
 			<div fxLayout="column" fxLayoutAlign="start start" fxFlex="20" fxHide.sm="true" fxHide.xs="true">
 				<div class="mat-drawer-content">
@@ -99,33 +133,4 @@
 			</div>
 		</div>
 	</div>
-
-
-	<!-- <div *ngFor="let g of groups" class="list-cards">
-		<div>
-			<h2 mat-subheader>{{g.name}}</h2>
-			<mat-divider></mat-divider>
-		</div>
-		<div fxLayout="row wrap" fxLayoutAlign="start stretch">
-			<mat-card *ngFor="let resp of g.responses | search:searchInput.value" fxLayout="column" fxLayoutAlign="space-between start"
-			 fxFlex="20" fxFlex.xl="20" fxFlex.lg="20" fxFlex.md="40" fxFlex.sm="100" fxFlex.xs="100" [ngClass]="resp.class">
-				<mat-card-header>
-					<div mat-card-avatar>
-						<i class="fas fa-info-circle" *ngIf="resp.class==='bg-info'"></i>
-						<i class="fas fa-check-circle" *ngIf="resp.class==='bg-good'"></i>
-						<i class="fas fa-exclamation-circle" *ngIf="resp.class==='bg-warn'"></i>
-						<i class="fas fa-times-circle" *ngIf="resp.class==='bg-error'"></i>
-					</div>
-					<mat-card-title class="dont-break-out">{{resp.name}}</mat-card-title>
-					<mat-card-subtitle><a target="_blank" class="dont-break-out" href="{{resp.responseUri}}">{{resp.responseUri}}</a></mat-card-subtitle>
-				</mat-card-header>
-				<mat-card-content>
-					<div fxFlex="100">
-						<h2>{{resp.statusCode}} {{resp.statusDescription}}</h2>
-						
-					</div>
-				</mat-card-content>
-			</mat-card>
-		</div>
-	</div> -->
 </div>
