@@ -93,7 +93,7 @@
 				<div *ngIf="checked">
 					<div *ngFor="let g of groups" class="list-cards">
 						<div style="width:100%">
-							<h2 mat-subheader>{{g.name}}</h2>
+							<h2 mat-subheader id="{{g.name}}">{{g.name}}</h2>
 							<mat-divider></mat-divider>
 						</div>
 						<div fxLayout="row wrap" fxLayoutAlign="start stretch">
@@ -101,10 +101,10 @@
 							 fxFlex="30" fxFlex.xl="30" fxFlex.lg="30" fxFlex.md="30" fxFlex.sm="48" fxFlex.xs="48">
 								<mat-card-header>
 									<div mat-card-avatar>
-										<i class="fas fa-info-circle" *ngIf="resp.class==='bg-info'"></i>
-										<i class="fas fa-check-circle" *ngIf="resp.class==='bg-good'"></i>
-										<i class="fas fa-exclamation-circle" *ngIf="resp.class==='bg-warn'"></i>
-										<i class="fas fa-times-circle" *ngIf="resp.class==='bg-error'"></i>
+										<i class="fas fa-info-circle fa-2x info" *ngIf="resp.class==='bg-info'"></i>
+										<i class="fas fa-check-circle fa-2x good" *ngIf="resp.class==='bg-good'"></i>
+										<i class="fas fa-exclamation-circle fa-2x warn" *ngIf="resp.class==='bg-warn'"></i>
+										<i class="fas fa-times-circle fa-2x error" *ngIf="resp.class==='bg-error'"></i>
 									</div>
 									<mat-card-title class="dont-break-out">{{resp.name}}</mat-card-title>
 									<mat-card-subtitle><a target="_blank" class="dont-break-out" href="{{resp.responseUri}}">{{resp.responseUri}}</a></mat-card-subtitle>

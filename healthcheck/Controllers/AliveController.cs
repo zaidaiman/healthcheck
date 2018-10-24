@@ -18,7 +18,8 @@ namespace healthcheck.Controllers
         [HttpGet("[action]")]
         public JsonResult AreYouAlive(string URL)
         {
-            if (Uri.IsWellFormedUriString(URL, UriKind.Absolute)) {
+            if (Uri.IsWellFormedUriString(URL, UriKind.Absolute))
+            {
                 HttpWebRequest req = (HttpWebRequest)WebRequest.Create(URL);
                 req.AllowAutoRedirect = true;
                 req.MaximumAutomaticRedirections = 99;
@@ -58,7 +59,8 @@ namespace healthcheck.Controllers
                     response.Close();
                 }
             }
-            return Json(new ResponseModel {
+            return Json(new ResponseModel
+            {
                 StatusCode = HttpStatusCode.Gone,
                 StatusDescription = "Gone"
             });
@@ -71,7 +73,8 @@ namespace healthcheck.Controllers
             return result.Result;
         }
 
-        private JsonResult ThreadScreenshot(string URL) {
+        private JsonResult ThreadScreenshot(string URL)
+        {
             try
             {
                 var options = new ChromeOptions();
@@ -82,9 +85,7 @@ namespace healthcheck.Controllers
                     var path = string.Format("{0}-{1}.png", folder, Guid.NewGuid().ToString());
 
                     driver.Navigate().GoToUrl(URL);
-                    //driver.GetScreenshot().SaveAsFile(path, OpenQA.Selenium.ScreenshotImageFormat.Png);
-                    var img = driver.GetScreenshot().AsBase64EncodedString;
-                    return Json(new { OK = true, image = img });
+                    return Json(new { OK = true, image = driver.GetScreenshot().AsBase64EncodedString });
                 }
             }
             catch (Exception ex)
@@ -111,7 +112,8 @@ namespace healthcheck.Controllers
         public string StatusDescription { get; set; }
         public bool SupportHeaders { get; set; }
         public string guid { get; set; }
-        public ResponseModel() {
+        public ResponseModel()
+        {
             guid = Guid.NewGuid().ToString();
         }
     }
