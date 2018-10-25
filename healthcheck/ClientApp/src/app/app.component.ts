@@ -1,9 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ApiService } from './api.service';
-import { ResponseModel, GroupModel } from './responseModel';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { GroupModel } from './responseModel';
 
 @Component({
 	selector: 'app-root',
@@ -54,6 +51,7 @@ export class AppComponent implements OnInit {
 						item.protocolVersion = x.protocolVersion;
 						item.server = x.server;
 						item.supportHeaders = x.supportHeaders;
+						item.createdDateTime = x.createdDateTime;
 
 						if (item.statusCode >= 100 && item.statusCode < 200) {
 							item.class = 'bg-info';

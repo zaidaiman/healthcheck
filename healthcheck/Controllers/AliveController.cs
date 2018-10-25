@@ -112,9 +112,11 @@ namespace healthcheck.Controllers
         public string StatusDescription { get; set; }
         public bool SupportHeaders { get; set; }
         public string guid { get; set; }
+        public DateTime createdDateTime { get; set; }
         public ResponseModel()
         {
             guid = Guid.NewGuid().ToString();
+            createdDateTime = DateTime.Now;
         }
     }
 

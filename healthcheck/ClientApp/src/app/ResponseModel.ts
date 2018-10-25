@@ -17,6 +17,7 @@ export class ResponseModel {
 	class: string;
 	name: string;
 	image: string;
+	createdDateTime: Date;
 }
 
 export class GroupModel {
