@@ -8,7 +8,7 @@ import { map } from 'rxjs/operators';
 @Component({
 	selector: 'app-root',
 	templateUrl: './app.component.html',
-	styleUrls: ['./app.component.css']
+	styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
 	title = 'Health Check';
@@ -18,6 +18,10 @@ export class AppComponent implements OnInit {
 	warn = 0;
 	error = 0;
 	checked = false;
+	bufferValue = 0;
+	counter = 0;
+	total = 0;
+
 	@ViewChild('searchInput') searchInput: ElementRef;
 
 	constructor(private apiService: ApiService) { }
@@ -27,13 +31,15 @@ export class AppComponent implements OnInit {
 
 		this.apiService.getURLs().subscribe(list => {
 			this.groups = list;
+			this.total = 0;
+			this.counter = 0;
+			this.bufferValue = 0;
 
 			this.groups.forEach(group => {
+				this.total += group.responses.length;
+
 				group.responses.forEach(item => {
-					this.apiService.screenshot(item.responseUri).subscribe(x => {
-						console.log(x);
-						item.image = x.image;
-					});
+					item.image = './assets/placeholder.png';
 					this.apiService.areYouAlive(item.responseUri).subscribe(x => {
 						item.loaded = true;
 						item.characterSet = x.characterSet;
@@ -68,6 +74,12 @@ export class AppComponent implements OnInit {
 						item.statusCode = error.status;
 						item.statusDescription = error.statusText;
 						item.class = 'bg-error';
+					});
+
+					this.apiService.screenshot(item.responseUri).subscribe(x => {
+						item.image = 'data:image/png;base64,' + x.image;
+						this.counter += 1;
+						this.bufferValue = (this.counter / this.total) * 100;
 					});
 				});
 			});

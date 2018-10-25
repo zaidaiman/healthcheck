@@ -1,3 +1,15 @@
+.right {
+    text-align: right;
+}
+
+.search-form {
+    width: 100%;
+}
+
+h2 {
+    margin-bottom: 10px;
+}
+
 .mat-drawer-content {
     font-size: 13px;
     position: -webkit-sticky;
@@ -5,12 +17,14 @@
     top: 20px;
     padding-left: 25px;
     box-sizing: border-box;
-	display: inline-flex;
-	margin-top:20px;
+    display: inline-flex;
+    margin-top: 20px;
 }
 
-.mat-list, .mat-nav-list, .mat-selection-list {
-	width:100%;
+.mat-list,
+.mat-nav-list,
+.mat-selection-list {
+    width: 100%;
 }
 
 .docs-toc-container {
