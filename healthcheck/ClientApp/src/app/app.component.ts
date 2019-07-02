@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
 	counter = 0;
 	total = 0;
 
-	@ViewChild('searchInput') searchInput: ElementRef;
+	@ViewChild('searchInput', { static: true }) searchInput: ElementRef;
 
 	constructor(private apiService: ApiService) { }
 
